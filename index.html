@@ -1,0 +1,65 @@
+<html>
+    <head></head>
+    <body>
+    <div id="vs">
+        <h1>Vue VS React: {{ winner }}</h1>
+        <div class="vue" v-bind:class="{ 'winner': vue > react, 'looser': vue < react }">
+            <b class="name">Vue:</b> {{ vue }} <svg width="14" height="16" aria-hidden="true" class="octicon octicon-star"><path fill="#333" fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"></path></svg>
+        </div>
+        <div class="react" v-bind:class="{ 'winner': vue < react, 'looser': vue > react}">
+            <b class="name">React:</b> {{ react }} <svg width="14" height="16" aria-hidden="true" class="octicon octicon-star"><path fill="#333" fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"></path></svg>
+        </div>
+        <div class="updated">
+            Updated: {{ updated }} ms ago
+        </div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script>
+        const V = new Vue({
+            el: '#vs',
+            data: {
+                vue: 0,
+                react: 0,
+                updated: 10000
+            },
+            created: function() {
+                this.tick();
+                setInterval(() => {this.tick()}, 10);
+            },
+            computed:{
+                winner: function(){
+                    return (this.vue > this.react) ? 'Vue' : 'React';
+                }
+            },
+            methods: {
+                tick: function(){
+                    let self = this;
+                    self.updated += 10;
+                    if(self.updated >= 10000){
+                        self.updated = 0;
+                        $.getJSON('https://api.github.com/repos/vuejs/vue', function (data) {
+                            self.vue = data.stargazers_count;
+                        });
+                        $.getJSON('https://api.github.com/repos/facebook/react', function (data) {
+                            self.react = data.stargazers_count;
+                        });
+                    }
+                }
+            }
+        });
+    </script>
+    <style>
+        .winner{
+            color: green;
+        }
+        .looser{
+            color: red;
+        }
+        .name{
+            width: 100px;
+            display: inline-block;
+        }
+    </style>
+    </body>
+</html>
