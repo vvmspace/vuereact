@@ -40,10 +40,10 @@
                     self.updated += 10;
                     if(self.updated >= 10000){
                         self.updated = 0;
-                        $.getJSON('https://api.github.com/repos/vuejs/vue', function (data) {
+                        $.getJSON('https://api.github.com/repos/vuejs/vue?' + Math.random().toString(36).substring(7), function (data) {
                             self.vue = data.stargazers_count;
                         });
-                        $.getJSON('https://api.github.com/repos/facebook/react', function (data) {
+                        $.getJSON('https://api.github.com/repos/facebook/react?' + Math.random().toString(36).substring(7), function (data) {
                             self.react = data.stargazers_count;
                         });
                     }
