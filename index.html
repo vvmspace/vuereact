@@ -25,7 +25,7 @@
             </svg>
         </div>
         <div class="updated col-md-12 center">
-            Updated: {{ updated }} ms ago
+            Обновлено: {{ updated }} мс назад
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
         data: {
             vue: 0,
             react: 0,
-            updated: 10000
+            updated: 60000
         },
         created: function () {
             this.tick();
@@ -60,7 +60,7 @@
             tick: function () {
                 let self = this;
                 self.updated += 10;
-                if (self.updated >= 10000) {
+                if (self.updated >= 60000) {
                     self.updated = 0;
                     $.getJSON('https://api.github.com/repos/vuejs/vue?' + Math.random().toString(36).substring(7), function (data) {
                         self.vue = data.stargazers_count;
