@@ -8,7 +8,8 @@
 <body>
 <div id="vs" class="container">
     <div class="row">
-        <h1 class="col-md-12 center">На Vue или React Коля хочет написать приложение? На {{ winner }}!</h1>
+        <h1 class="col-md-12 center">-На Vue или React Коля хочет написать приложение?
+            <br />-На {{ winner }}!</h1>
         <div class="vue col-md-12 center" v-bind:class="{ 'winner': vue > react, 'looser': vue < react }">
             <b class="name">Vue:</b> {{ vue }}
             <svg width="14" height="16" aria-hidden="true" class="octicon octicon-star">
